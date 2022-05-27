@@ -43,16 +43,16 @@ of your machine learning application:
 # Installation
 To install NF4IP, clone this repository, enter the cloned directory and install it locally using pip:
 ```bash
-git clone https://gitlab.hzdr.de/HelmholtzAI/innforinverseproblems.git
-cd innforinverseproblems
+git clone [https://github.com/Photon-AI-Research/NF4IP.git](https://github.com/Photon-AI-Research/NF4IP.git)
+cd NF4IP
 pip install -r requirements.txt
 pip install -e setup.py
 ```
 The -e will make an editable install, so you can edit the NF4IP library any time and see the effect instantly.
 
-# Gettings started
+# Getting started
 
-you can start generating your first project by executing:
+You can start generating your first project by executing:
 ```
 NF4IP generate project <targetDir>
 ```
@@ -67,7 +67,7 @@ The directory structure created is basicly a [Cement 3.0](https://docs.builtonce
 While Cement has its own documentation, which should be consulted if there are open questions,
 the NF4IP documentation will already give you everything you need to know to start your first project.
 
-
+# Developer Instruction for Extending NF4IP
 
 ## Installation
 
