@@ -1,31 +1,27 @@
 # NF4IP
 
 Normalising Flows for Inverse Problems (NF4IP) is a Python framework that provides all means for usage of normalising flows in solving inverse problems. The framework allows low-key usage of recent advances in machine learning for analysis of experimental data based on Surrogate Models as well as one-step solution to inverse problems.
+<!--
+Applications of this framework can be found here: [Photon AI Research](https://http://photon-ai-research.github.io/).
+- Injection Radiation
+- SAXS
+- GI-SAXS
+--> 
 
-Main contributions of this framework will be
-
-1. Low-key training of normalising flows for surrogate modeling and data analysis
-2. WIP: Data analysis by
- - Gradient Descent
- - Approximate Bayesian Computation
- - Bayesian Inference
-
-Example usage of this framework can be found [Photon AI Research](https://http://photon-ai-research.github.io/).
-
-The framework is being developed collaboratively by
+The framework is being collaboratively developed by
 - [Photon AI Research](https://http://photon-ai-research.github.io/)
-- [Helmholtz AI Consultant Team](https://www.hzdr.de/db/Cms?pOid=60710&pNid=0) for MATTER research
+- [HZDR's AI Consultant Team](https://www.hzdr.de/db/Cms?pOid=60710&pNid=0) for MATTER research
 - [Helm & Walther IT Solutions](https://helmundwalter.de)
 
 
 Maintainer:
-- Dr. [Nico Hoffmann](mailto:n.hoffmann@hzdr.de) of PAIR
+- [Nico Hoffmann](mailto:n.hoffmann@hzdr.de) of PAIR
 
 # Introduction
 The aim of this project is to make it easier to solve inverse problems.
-NF4IP Based on [FrEIA from Heidelberg University](https://github.com/VLL-HD/FrEIA). 
-While FrEIA provides a toolbox for building invertible networks, NF4IP uses this toolbox 
-to offer a selection of ready-to-use network architectures.
+NF4IP is based on [FrEIA from Heidelberg University](https://github.com/VLL-HD/FrEIA), though
+while FrEIA provides a toolbox for building invertible networks, NF4IP uses this toolbox 
+to offer a selection of ready-to-use network architectures tailored to inverse problems typically encountered in physics.
 
 In addition, NF4IP already offers useful features that simplify the development 
 of your machine learning application:
@@ -43,12 +39,15 @@ of your machine learning application:
 # Installation
 To install NF4IP, clone this repository, enter the cloned directory and install it locally using pip:
 ```bash
-git clone [https://github.com/Photon-AI-Research/NF4IP.git](https://github.com/Photon-AI-Research/NF4IP.git)
+git clone https://github.com/Photon-AI-Research/NF4IP.git
 cd NF4IP
-pip install -r requirements.txt
 pip install -e setup.py
 ```
 The -e will make an editable install, so you can edit the NF4IP library any time and see the effect instantly.
+
+<!--
+pip install -r requirements.txt // we need to make this file first :D
+-->
 
 # Getting started
 
@@ -67,21 +66,11 @@ The directory structure created is basicly a [Cement 3.0](https://docs.builtonce
 While Cement has its own documentation, which should be consulted if there are open questions,
 the NF4IP documentation will already give you everything you need to know to start your first project.
 
-# Developer Instruction for Extending NF4IP
+# Framework Developer Instructions
+These instructions are for anyone interested in improving NF4IP itself. The following steps are not necessary if you want to develop an application based on NF4IP. This project includes a number of helpers in the `Makefile` to streamline common development tasks.
 
-## Installation
-
-```
-$ pip install -r requirements.txt
-
-$ pip install setup.py
-```
-
-## Development
-
-This project includes a number of helpers in the `Makefile` to streamline common development tasks.
-
-### Environment Setup
+ 
+## Environment Setup
 
 The following demonstrates setting up and working with a development environment:
 
@@ -95,14 +84,13 @@ $ source env/bin/activate
 
 ### run NF4IP cli application
 
-$ NF4ip --help
+$ NF4IP --help
 
 
 ### run pytest / coverage
 
 $ make test
 ```
-
 
 ### Releasing to PyPi
 
