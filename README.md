@@ -63,8 +63,7 @@ IDE. If you have no preference, we recommend the free
 [pyCharm community edition](https://www.jetbrains.com/de-de/pycharm/).
 
 The directory structure created is basicly a [Cement 3.0](https://docs.builtoncement.com)-Project.
-While Cement has its own documentation, which should be consulted if there are open questions,
-the NF4IP documentation will already give you everything you need to know to start your first project.
+The [NF4IP documentation](https://github.com/Photon-AI-Research/NF4IP/tree/main/docs) will already give you everything you need to know to start your first project. Additionally, cement got its own documentation which should be consulted if there are open questions concerning the generation of CLI applications based on NF4IP.
 
 # Framework Developer Instructions
 These instructions are for anyone interested in improving NF4IP itself. The following steps are not necessary if you want to develop an application based on NF4IP. This project includes a number of helpers in the `Makefile` to streamline common development tasks.
