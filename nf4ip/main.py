@@ -1,4 +1,5 @@
-from cement import App, TestApp
+from cement import App
+from cement.core.foundation import TestApp
 from cement.core.exc import CaughtSignal
 
 from nf4ip.core.config import handle_config
@@ -9,7 +10,7 @@ import horovod.torch as hvd
 from nf4ip.interfaces.loss import LossInterface
 from nf4ip.losses.mae import MaeLoss
 from nf4ip.losses.mse import MseLoss
-from nf4ip.losses.mdd_multiscale import MddMultiscaleLoss
+from nf4ip.losses.mmd_multiscale import MMDMultiscaleLoss
 
 from nf4ip.interfaces.optimizer import OptimizerInterface
 from nf4ip.optimizers.adam import AdamOptimizer, CONFIG as ADAM_CONFIG
@@ -17,7 +18,6 @@ from nf4ip.optimizers.adam import AdamOptimizer, CONFIG as ADAM_CONFIG
 from .core.exc import NF4IPError
 from .controllers.base import Base
 import torch
-
 
 from nf4ip.core.abstactmodel import CONFIG
 
@@ -30,7 +30,7 @@ class NF4IP(App):
         label = 'nf4ip'
 
         # configuration defaults
-        # config_defaults = CONFIG
+        #config_defaults = CONFIG
 
         # call sys.exit() on close
         exit_on_close = True
@@ -94,7 +94,7 @@ class NF4IP(App):
         self.interface.define(LossInterface)
         self.handler.register(MaeLoss)
         self.handler.register(MseLoss)
-        self.handler.register(MddMultiscaleLoss)
+        self.handler.register(MMDMultiscaleLoss)
 
         self.interface.define(OptimizerInterface)
         self.handler.register(AdamOptimizer)

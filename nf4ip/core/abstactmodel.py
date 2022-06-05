@@ -5,6 +5,7 @@ from datetime import datetime
 import horovod.torch as hvd
 from cement import Interface
 import torch
+from tqdm import tqdm
 
 CONFIG = {
     # application params
@@ -146,7 +147,7 @@ class AbstractModel(Interface):
         ):
             pass
 
-        for self.i_epoch in range(self.i_epoch, self.n_epochs + 1):
+        for self.i_epoch in tqdm(range(self.i_epoch, self.n_epochs + 1)):
             self.app.log.debug("Starting epoch {}".format(self.i_epoch))
             for res in self.app.hook.run(
                     'pre_epoch',

@@ -1,4 +1,3 @@
-
 from pytest import raises
 from nf4ip.main import NF4IPTest
 
@@ -8,10 +7,15 @@ def test_nf4ip():
         app.run()
         assert app.exit_code == 0
 
+'''
+TODO: cement's test interface got changed so the following
+two tests are not functional anymore
+'''
 
 def test_nf4ip_debug():
     # test that debug mode is functional
     argv = ['--debug']
+    
     with NF4IPTest(argv=argv) as app:
         app.run()
         assert app.debug is True

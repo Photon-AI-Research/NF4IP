@@ -1,4 +1,4 @@
 
-class Ml4IpError(Exception):
+class NF4IPError(Exception):
     """Generic errors."""
     pass

@@ -12,8 +12,8 @@ CONFIG = {
     'ndim_pad': 6,
     'ndim_z': 2,
     'inn_network_factory': 'general_inn',
-    'loss_backward': 'mdd_multiscale',
-    'loss_latent': 'mdd_multiscale',
+    'loss_backward': 'mmd_multiscale',
+    'loss_latent': 'mmd_multiscale',
     'loss_fit': 'mse',
 }
 
@@ -107,7 +107,7 @@ class InnModel(AbstractModel):
             self.optimizer.zero_grad()
 
             # Forward step:
-            output = self.model(x)
+            output, _ = self.model(x)
             output = self.app.filter.run('train_forward_output', output, model=self)
             # Shorten output, and remove gradients wrt y, for latent loss
             y_short = torch.cat((y[:, :self.ndim_z], y[:, -self.ndim_y:]), dim=1)
@@ -135,8 +135,10 @@ class InnModel(AbstractModel):
             y_rev = torch.cat((orig_z_perturbed, rev_pad_yz, y), dim=1)
             y_rev_rand = torch.cat((torch.randn(self.batch_size, self.ndim_z, device=self.device), rev_pad_yz, y), dim=1)
 
-            output_rev = self.app.filter.run('train_backward_output', self.model(y_rev, rev=True), model=self)
-            output_rev_rand = self.app.filter.run('train_backward_rand_output', self.model(y_rev_rand, rev=True), model=self)
+            output_rev, _ = self.model(y_rev, rev=True)
+            output_rev = self.app.filter.run('train_backward_output', output_rev, model=self)
+            output_rev_rand, _ = self.model(y_rev_rand, rev=True)
+            output_rev_rand = self.app.filter.run('train_backward_rand_output', output_rev_rand, model=self)
 
             l_rev = (
                 self.lambd_rev
@@ -154,6 +156,8 @@ class InnModel(AbstractModel):
             self.loss_backward += l_rev
             self.loss_backward.backward()
             for p in self.model.parameters():
+                if (p.grad is None):
+                    continue
                 p.grad.data.clamp_(-15.00, 15.00)
 
             self.optimizer.step()
@@ -195,7 +199,7 @@ class InnModel(AbstractModel):
                                 y_samps_val], dim=1)
         y_samps_val = y_samps_val.float()
 
-        rev_x = self.model(y_samps_val, rev=True)
+        rev_x, _ = self.model(y_samps_val, rev=True)
         rev_x = self.app.filter.run('val_backward_output', rev_x, model=self)
         predicted = rev_x[:, 0]
 
